@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+    <title>Drink Recipes-{{title}}</title>
+    {% else %}
+    <title>Drink Recipes</title>
+    {% endif %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/b8cedb7402.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+        <a href="/" class="navbar-brand">Fatma's Famous Whiskey Sours</a>
+    
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-lable="Toggle-navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto">
+                <li class="active nav-item mr-2"><a class="nav-link" href="{% url 'recipes-home' %}">Home</a></li>
+                <li class="nav-item mr-2"><a class="nav-link" href="/">About</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Whiskeys</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Irish</a>
+                        <a class="dropdown-item" href="#">Scotch</a>
+                        <a class="dropdown-item" href="#">Japanese</a>
+                        <a class="dropdown-item" href="#">American</a>
+                    </div>
+                </li>
+                <li class="nav-item mr-2 d-block d-sm-none"><a class="nav-link" href="/login">Sign In/Sign Up</a></li>
+            </ul>
+        </div>
+        <div class="navbar-nav">
+            {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'user-profile' %}">My Profile</a>
+            <a class="nav-item nav-link" href="{% url 'user-logout' %}">Logout</a>
+            {% else %}
+            <a class="nav-item nav-link" href="{% url 'user-login' %}">Login</a>
+            <a class="nav-item nav-link" href="{% url 'user-register' %}">Register</a>
+            {% endif %}
+        </div>
+        <div class="d-none d-md-block">
+            <p class="navbar-text my-auto mr-2"><i>Great whiskey sours delivered to your door.</i></p>
+            <a href="/login">Sign in/Sign Up</a>
+        </div>
+    </nav>
+    <div class="container mt-4 col-8">
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">{{message}}</div>
+        {% endfor %} {% endif %} {% block content %} {% endblock %}
+    </div>
+    
+          <article class="container alert-container">
+            <div class="row d-none d-sm-block">
+              <div class="col-12">
+                <div class="alert alert-warning">
+                  <strong>Sale Now On</strong>Get 12 monthes for the price of 6! <a href="/">See here for details!</a>
+                </div>
+              </div>
+            </div>
+          
+    
+    <div class="container-fluid callout-container">
+        <!--Call Out-->
+        <div class="row">
+            <div class="col-12">
+                <section class="callout jumbotron text-center">
+                    <h1 class="jumbotron-header">The finest whiskey sours delivered to your doorstep.</h1>
+    
+                    <hr class="block-divider">
+    
+                    <p class="lead">Sign up today to start recieving the world's best whiskeys every month.<s
+                            class="d-none d-sm-inline">19.99</s>
+                        <span class="d-inline d-sm-none"><br></span>
+                        <strong><mark>The first one is free!</mark></strong>
+                    </p>
+                    <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#signUpModal">Sign Up!</button>
+                    <p class="text-muted"><small>You must be over 18 to sign up to our service. Please drink
+                            responsibly</small> </p>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+    <div class="quote-container">
+        <!--qoutes-->
+        <div class="row">
+            <section class="quotes">
+                <div class="row">
+                    <div class="col-12 my-5">
+                        <h2 class="text-uppercase">Quotes:</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="media">
+                            <div class="d-none d-sm-block">
+                                <img src="fatma.jpg" class="rounded-circle mr-3" height="100" width="100">
+                            </div>
+                            <div class="media-body">
+                                <blockquote class="blockquote">
+                                    <p>"I've been introduced to more than 10 great international whiskeys I never knew
+                                        about"</p>
+                                    <p>-Tue Qute</p>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="media">
+                            <div class="d-none d-sm-block">
+                                <img src="sun.jpg" class="rounded-circle mr-3" height="100" width="100">
+                            </div>
+                            <div class="media-body">
+                                <blockquote class="blockquote">
+                                    <p>"Damn, shit's tasty."</p>
+                                    <p>-Moe Love</p>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+        </div>
+    </div>
+    
+    <hr>
+    <div class="features-container">
+        <!--features-->
+        <div class="row">
+            <section class="features">
+                <div class="row">
+                    <div class="col-12 my-5">
+                        <h2 class="text-uppercase">Features:</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="feature">
+                            <h3><i class="fa-solid fa-gift d-none d-sm-block"></i> Feature 1 <span
+                                    class="badge badge-success">New!</span></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p><a class="btn btn-sm btn-light">Read More</a></p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="feature">
+                            <h3><i class="fa-solid fa-credit-card d-none d-sm-block"></i> Feature 2</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p><a class="btn btn-sm btn-light">Read More</a></p>
+                        </div>
+                    </div>
+                    <div class="col-12 d-md-none d-lg-block col-lg-4">
+                        <div class="feature">
+                            <h3><i class="fa-solid fa-circle-xmark d-none d-sm-block"></i> Feature 3</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p><a class="btn btn-sm btn-light">Read More</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <hr>
+    
+    <!--favourites-->
+    <div class="row">
+        <section class="favourites">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-uppercase">Favourites:</h2>
+                    <p class="my-auto">Check out this months favourites.</p>
+                </div>
+            </div>
+    </div>
+    <div class="row">
+        <table class="table table-sm table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Origin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Whiskey 1</td>
+                    <td>Country 1</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Whiskey 2</td>
+                    <td>Country 2</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Whiskey 3</td>
+                    <td>Country 3</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Whiskey 4</td>
+                    <td>Country 4</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Whiskey 5</td>
+                    <td>Country 5</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    </section>
+    </div>
+    </article>
+    <div class="modal" tabindex="-1" role="dialog" id="signUpModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign up to Fatma's Famous Whiskey Sours</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input type="password" class="form-control" id="Password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="repeatPassword">Repeat Password</label>
+                            <input type="password" class="form-control" id="repeat" placeholder=" Repeat Password">
+    
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+   
+</body>
+</html>
